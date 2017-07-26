@@ -1,4 +1,12 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BabiliPlugin = require('babili-webpack-plugin');
+const webpack = require('webpack');
+
+exports.minifyJavaScript = () => ({
+  plugins: [
+    new BabiliPlugin(),
+  ],
+});
 
 exports.extractCSS = ({ include, exclude, use }) => {
   // Output extracted CSS to a file
@@ -81,3 +89,14 @@ exports.loadJavaScript = ({ include, exclude }) => ({
     ],
   },
 });
+
+exports.setFreeVariable = (key, value) => {
+  const env = {};
+  env[key] = JSON.stringify(value);
+
+  return {
+    plugins: [
+      new webpack.DefinePlugin(env),
+    ],
+  };
+};

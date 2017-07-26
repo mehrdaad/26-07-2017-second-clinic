@@ -37,8 +37,18 @@ const productionConfig = merge([
         minChunks: isVendor,
       }),
     ],
+    performance: {
+      hints: 'warning', // 'error' or false are valid too
+      maxEntrypointSize: 100000, // in bytes
+      maxAssetSize: 100000, // in bytes
+    },
   },
   parts.extractCSS({ use: 'css-loader' }),
+  parts.minifyJavaScript(),
+  parts.setFreeVariable(
+    'process.env.NODE_ENV',
+    'production'
+  ),
 ]);
 
 function isVendor({ resource }) {
