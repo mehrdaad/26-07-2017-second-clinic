@@ -17,7 +17,7 @@ const commonConfig = merge([
     },
     output: {
       path: PATHS.build,
-      filename: '[name].js',
+      filename: '[name].[chunkhash].js',
     },
     plugins: [
       new HtmlWebpackPlugin({
