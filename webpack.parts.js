@@ -67,3 +67,17 @@ exports.loadCSS = ({ include, exclude } = {}) => ({
     ],
   },
 });
+
+exports.loadJavaScript = ({ include, exclude }) => ({
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include,
+        exclude,
+
+        loader: 'babel-loader',
+      },
+    ],
+  },
+});
