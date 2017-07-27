@@ -1,4 +1,5 @@
 build/
 node_modules/
-*.json
+records.json
+stats.json
 
