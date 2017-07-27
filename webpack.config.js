@@ -23,6 +23,7 @@ const commonConfig = merge([
       new HtmlWebpackPlugin({
         title: 'Webpack demo',
       }),
+      new webpack.NamedModulesPlugin(),
     ],
   },
   parts.lintJavaScript({ include: PATHS.app }),
@@ -36,12 +37,16 @@ const productionConfig = merge([
         name: 'vendor',
         minChunks: isVendor,
       }),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'currywurst',
+      }),
     ],
     performance: {
       hints: 'warning', // 'error' or false are valid too
       maxEntrypointSize: 100000, // in bytes
       maxAssetSize: 100000, // in bytes
     },
+    recordsPath: path.join(__dirname, 'records.json'),
   },
   parts.extractCSS({ use: 'css-loader' }),
   parts.minifyJavaScript(),
